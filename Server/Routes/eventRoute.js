@@ -51,6 +51,8 @@ router.post('/event', async (req, res, next) => {
     const savedEvent = await newEvent.save();
     res.status(201).json({
       success: true,
+    
+    
       message: 'Event created successfully',
       event: savedEvent
     });
