@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './logindashboard.css';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const LoginDashboard = () => {
   const [activeSection, setActiveSection] = useState('userInfo');
   const [userData, setUserData] = useState(null);
@@ -17,24 +21,22 @@ const LoginDashboard = () => {
   useEffect(() => {
     if (activeSection === 'userInfo') {
       setLoading(true);
-      fetch('/api/user', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch user data');
-          }
-          return response.json();
+      axios
+        .get(`${API_BASE_URL}/api`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         })
-        .then((data) => {
-          setUserData(data);
-          setLoading(false);
+        .then((response) => {
+          if (response.data.success) {
+            setUserData(response.data.user);
+            setLoading(false);
+          } else {
+            throw new Error(response.data.message || 'Failed to fetch user data');
+          }
         })
         .catch((err) => {
-          setError(err.message);
+          setError(err.response?.data?.message || 'Error fetching user data');
           setLoading(false);
         });
     }
@@ -44,24 +46,22 @@ const LoginDashboard = () => {
   useEffect(() => {
     if (activeSection === 'events') {
       setLoading(true);
-      fetch('/api/user/events', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch events');
-          }
-          return response.json();
+      axios
+        .get(`${API_BASE_URL}/api/user/events`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         })
-        .then((data) => {
-          setEvents(data);
-          setLoading(false);
+        .then((response) => {
+          if (response.data.success) {
+            setEvents(response.data.events);
+            setLoading(false);
+          } else {
+            throw new Error(response.data.message || 'Failed to fetch events');
+          }
         })
         .catch((err) => {
-          setError(err.message);
+          setError(err.response?.data?.message || 'Error fetching events');
           setLoading(false);
         });
     }
@@ -90,11 +90,11 @@ const LoginDashboard = () => {
       {events.length > 0 && !loading && !error ? (
         <ul className="events-list">
           {events.map((event) => (
-            <li key={event.id} className="event-item">
-              <p><strong>{event.title}</strong></p>
+            <li key={event._id} className="event-item">
+              <p><strong>{event.name}</strong></p>
               <p>Date: {new Date(event.date).toLocaleDateString()}</p>
               <p>Location: {event.location}</p>
-              <p>Description: {event.description}</p>
+              <p>Description: {event.description || 'No description provided'}</p>
             </li>
           ))}
         </ul>
