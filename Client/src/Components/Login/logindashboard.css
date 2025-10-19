@@ -1,0 +1,175 @@
+/* Modern and attractive styles for LoginDashboard */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  font-family: 'Inter', sans-serif;
+}
+
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white;
+  padding: 2.5rem 1.5rem;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.sidebar button.active {
+  background-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar button.logout {
+  margin-top: auto;
+  background-color: #ef4444;
+  font-weight: 600;
+}
+
+.sidebar button.logout:hover {
+  background-color: #dc2626;
+  transform: translateX(5px);
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 1rem 0 0 1rem;
+  margin: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.content-section {
+  background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.content-section:hover {
+  transform: translateY(-5px);
+}
+
+.content-section h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 0.5rem;
+}
+
+.user-details p {
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  color: #374151;
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+}
+
+.user-details p strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+}
+
+.event-item {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.event-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.event-item p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.event-item p strong {
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.error {
+  color: #ef4444;
+  font-weight: 500;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  border-radius: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 1.5rem;
+  }
+
+  .main-content {
+    margin: 0;
+    padding: 1.5rem;
+    border-radius: 0;
+  }
+
+}
