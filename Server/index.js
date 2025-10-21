@@ -8,7 +8,7 @@ const connectDB    = require('./Connection/dbconnection');
 const userRoute    = require('./Routes/userRoute');
 const adminRoute   = require('./Routes/adminRoute');
 const eventRoute   = require('./Routes/eventRoute');
-
+const donationRoute = require('./Routes/donationRoute');  
 const app = express();
 
 // Connect to MongoDB
@@ -32,6 +32,7 @@ app.use('/api', userRoute);
 app.use('/api', adminRoute);
 
 app.use('/api', eventRoute);
+app.use('/api', donationRoute);
 
 // Health Check
 app.get('/', (req, res) => {
